@@ -41,6 +41,8 @@ python run_itemknn.py --help
 
 ## Experiments Results
 
+All results achieved are based on time-aware split by ratio operation.
+
 ### ML-1M
 
 origin-ItemKNN

@@ -1,10 +1,21 @@
-![DaisyRec](logo.png)
-
 ## Overview
 
 DaisyRec is a Python toolkit dealing with rating prediction and item ranking issue.
 
 The name DAISY (roughly :) ) stands for Multi-**D**imension f**AI**rly comp**A**r**I**son for recommender **SY**stem.
+
+## How to run
+this repo is just a temporary project used for submitting, 
+
+1. Make sure running command `python setup.py build_ext --inplace` to compile dependent extensions before running the other code. After that, you will find file \*.so or \*.pyd file generated in path `daisy/model/`
+
+2. In order to reproduce results, you need run `python data_generator.py` to create `experiment_data` folder with certain public dataset listed in our paper. If you just wanna research one certain dataset, you need modify code in `data_generator.py` to indicate and let this code yield train dataset and test dataset as you wish.
+
+3. There are parameter tuning code for validation dataset stored in `nested_tune_kit` and KPI-generating code for test dataset stored in `examples`. Each of the code in these folders should be moved in the root path, just the same hierarchy as `data_generator.py`, so that every user could successfully implement.
+
+4. As we all know, validation dataset is used for parameter tuning, so we provide *split_validation* interface inside all codes in `nested_tune_kit` folder. Further and more detail parameter setting information about validation split method is depicted in `daisy/utils/loader.py`
+
+5. After finished operations above, you can just run the code you moved before and wait for the results generated in `tune_log/` or `res/` folder, which was dynamically created while running.
 
 ## Examples to run:
 
@@ -25,6 +36,7 @@ python run_itemknn.py --help
 
 ## Dependencies
 
+- Python 3.7
 - torch (>=1.1.0)
 - Numpy (>=1.18.0)
 - Pandas (>=0.24.0)

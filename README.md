@@ -19,18 +19,29 @@ this repo is just a temporary project used for submitting,
 
 ## Examples to run:
 
-The default top-K number is set to 50, you can change top-K number by modifying `topk` argument in `run_*.py`.
+What should I do with daisyRec if I want to reproduce the top-20 result published like *BPR-MF* with ML-1M-10core dataset.
+
+1. Assume you have already run `data_generator.py` and get TFO(time-aware split by ratio method) test dataset, you must get files named `train_ml-1m_10core_tfo.dat`, `test_ml-1m_10core_tfo.dat` in `./experiment_data/`. **This step is essential!**
+
+2. The whole procedure contains tuning and testing. Therefore, we need run `hp_tune_pair_mf.py` to get the best parameter settings. Command to run:
+```
+python hp_tune_pair_mf.py --dataset=ml-1m --prepro=10core --val_method=tfo --test_method=tfo --topk=20 --loss_type=BPR --gpu=0
+  ```
+  Since all reasonable parameter search scope was fixed in the code, there is no need to parse more arguments
+  
+3. After you finished step 2 and just get the best parameter settings from `tune_log/` or yu just wanna reproduce the results provided in paper, you can run the following command to achieve it.
 
 ```
-python run_itemknn.py --sim_method=pearson --topk=15
-python run_point_fm.py --loss_type=CL
+python run_pair_mf.py --dataset=ml-1m --prepro=10core --val_method=tfo --test_method=tfo --topk=20 --loss_type=BPR --num_ng=2 --factors=34 --epochs=50 --lr=0.0005 --lamda=0.0016 --sample_method=uniform --gpu=0
 ```
 
 More details of arguments are available in help message, try:
 
 ```
-python run_itemknn.py --help
+python run_pair_mf.py --help
 ```
+
+4. After terminated step 3, you can take the results from the dynamically generated result file `./res/ml-1m/10core_tfo_pairmf_BPR_uniform.csv`
 
 ---
 

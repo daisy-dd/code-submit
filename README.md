@@ -29,7 +29,7 @@ python hp_tune_pair_mf.py --dataset=ml-1m --prepro=10core --val_method=tfo --tes
   ```
   Since all reasonable parameter search scope was fixed in the code, there is no need to parse more arguments
   
-3. After you finished step 2 and just get the best parameter settings from `tune_log/` or yu just wanna reproduce the results provided in paper, you can run the following command to achieve it.
+3. After you finished step 2 and just get the best parameter settings from `tune_log/` or you just wanna reproduce the results provided in paper, you can run the following command to achieve it.
 
 ```
 python run_pair_mf.py --dataset=ml-1m --prepro=10core --val_method=tfo --test_method=tfo --topk=20 --loss_type=BPR --num_ng=2 --factors=34 --epochs=50 --lr=0.0005 --lamda=0.0016 --sample_method=uniform --gpu=0
